@@ -123,8 +123,7 @@ Patch21: 0002-ampere-arm64-Work-around-Ampere-Altra-erratum-82288-.patch
 Patch22: xe-nonx86.patch
 
 # bsb2e patches
-Patch23: bigscreen-beyond-kernel-6.17-1.patch
-Patch24: bigscreen-beyond-kernel-6.17-2.patch
+Patch23: bigscreen-beyond-kernel-6.17.patch
 
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 %define debug_package %{nil}
@@ -435,9 +434,8 @@ patch -p1 -i %{PATCH20}
 patch -p1 -i %{PATCH21}
 patch -p1 -i %{PATCH22}
 
-# Apply bsb2e patches
+# Apply bsb2 patches
 patch -p1 -i %{PATCH23}
-patch -p1 -i %{PATCH24}
 
 # Fetch the config and move it to the proper directory
 cp %{SOURCE1} .config
@@ -1129,8 +1127,7 @@ fi
 
 %changelog
 * Sun Oct 26 2025 RayFoxyote <ray@foxyote.com> - 6.17.3-200_bsb2e
-- Add bigscreen-beyond-kernel-6.17-1.patch
-- Add bigscreen-beyond-kernel-6.17-2.patch
+- Add bigscreen-beyond-kernel-6.17.patch
 
 * Wed Oct 15 2025 LionHeartP <LionHeartP@proton.me> - 6.17.3-200
 - Update to 6.17.3
