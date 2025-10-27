@@ -1,23 +1,30 @@
-Nobara-Project/rpm-sources - Bigscreen Beyond (1/2/2e)
----
+# Nobara-Project/rpm-sources - Bigscreen Beyond (1/2/2e)
+Modified and additional packages from/added to the Nobara RPM sources. Contains tools and fixes for the Bigscreen Beyond 1/2/2e.
+
 This repository contains everything required to get up and running with the Bigscreen Beyond 2e. Im new to patches and packaging but I think I did a good job.
 
-Installing Kernel Patches
----
+## Usage
+First, add enable the COPR
+```shell
+sudo dnf copr enable rayfoxyote/nobara-42-bsb
+```
 
-Installing Steam with udev Rules
----
-
-Installing EyeTracking Software
----
+### Installing Kernel Patches
 
 
-Modifications
----
+### Installing steam-devices with udev Rules
+```
+sudo dnf update steam-devices
+```
+
+### Installing [Baballonia Face Tracking Software](https://github.com/Project-Babble/Baballonia)
+```shell
+sudo dnf install baballonia
+```
+
+
+## Modifications Made
 - appstream:
-  - steam
-    - Added [BSB Rules](https://lvra.gitlab.io/docs/other/bigscreen-beyond/#bigscreen-beyond-2e-eyetracking-via-baballonia-under-linux)
-  - Baballonia
     - Added baballonia.spec to build and install [Baballonia](https://github.com/Project-Babble/Baballonia).
 - baseos:
   - kernel (6.17)

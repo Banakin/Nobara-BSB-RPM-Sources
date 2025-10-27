@@ -9,7 +9,7 @@
 
 Name:           steam-devices
 Version:        1.0.0.101^git%{commitdate}.%{shortcommit}
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        MIT
 Summary:        Device support for Steam-related hardware
 Url:            https://github.com/ValveSoftware/steam-devices/
