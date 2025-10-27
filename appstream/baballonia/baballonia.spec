@@ -57,8 +57,6 @@ install -d %{buildroot}%{_libexecdir}/%{name}
 install -d %{buildroot}%{_datadir}/applications
 install -d %{buildroot}/lib64
 
-ls -la %{_publishdir}
-
 # Copy published files into libexec; publish output is relative to buildroot in our build step
 cp -a %{_publishdir}/* %{buildroot}%{_libexecdir}/%{name}/
 
