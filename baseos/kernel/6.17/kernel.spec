@@ -54,7 +54,7 @@ Version: %{_basekver}.%{_stablekver}
 %if 0%{?_is_rc}
 %define customver 0.%{_rcver}
 %else
-%define customver 200_bsb2e
+%define customver 200_bsb
 %endif
 
 Release:%{customver}.nobara%{?dist}
@@ -122,7 +122,7 @@ Patch20: 0001-ampere-arm64-Add-a-fixup-handler-for-alignment-fault.patch
 Patch21: 0002-ampere-arm64-Work-around-Ampere-Altra-erratum-82288-.patch
 Patch22: xe-nonx86.patch
 
-# bsb2e patches
+# bsb patches
 Patch23: bigscreen-beyond-kernel-6.17.patch
 
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
@@ -1126,7 +1126,7 @@ fi
 %files
 
 %changelog
-* Sun Oct 26 2025 RayFoxyote <ray@foxyote.com> - 6.17.3-200_bsb2e
+* Sun Oct 26 2025 RayFoxyote <ray@foxyote.com> - 6.17.3-200_bsb
 - Add bigscreen-beyond-kernel-6.17.patch
 
 * Wed Oct 15 2025 LionHeartP <LionHeartP@proton.me> - 6.17.3-200
