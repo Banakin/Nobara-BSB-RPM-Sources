@@ -434,7 +434,7 @@ patch -p1 -i %{PATCH20}
 patch -p1 -i %{PATCH21}
 patch -p1 -i %{PATCH22}
 
-# Apply bsb2 patches
+# Apply bsb patches
 patch -p1 -i %{PATCH23}
 
 # Fetch the config and move it to the proper directory
