@@ -10,11 +10,14 @@ sudo dnf copr enable rayfoxyote/nobara-42-bsb
 ```
 
 ### Installing Kernel Patches
+```shell
+sudo dnf upgrade --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" kernel
+```
 
 
 ### Installing steam-devices with udev Rules
-```
-sudo dnf update steam-devices
+```shell
+sudo dnf upgrade --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" steam-devices
 ```
 
 ### Installing [Baballonia Face Tracking Software](https://github.com/Project-Babble/Baballonia)
