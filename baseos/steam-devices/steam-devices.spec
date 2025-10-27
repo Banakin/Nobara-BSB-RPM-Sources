@@ -16,6 +16,7 @@ Url:            https://github.com/ValveSoftware/steam-devices/
 Source0:        %{url}/archive/%{commit}/%{name}-%{version}.tar.gz
 # Input devices seen as joysticks:
 Source1:        https://raw.githubusercontent.com/denilsonsa/udev-joystick-blacklist/master/after_kernel_4_9/51-these-are-not-joysticks-rm.rules
+Source2:        60-steam-bsb.rules
 
 BuildArch:      noarch
 
@@ -38,7 +39,7 @@ and other non-Steam games and game launchers.
 %install
 install -Dpm0644 60-steam-input.rules %{buildroot}%{_udevrulesdir}/60-steam-input.rules
 install -Dpm0644 60-steam-vr.rules %{buildroot}%{_udevrulesdir}/60-steam-vr.rules
-install -Dpm0644 60-steam-bsb.rules %{buildroot}%{_udevrulesdir}/60-steam-bsb.rules
+install -Dpm0644 %{SOURCE2} %{buildroot}%{_udevrulesdir}/60-steam-bsb.rules
 install -Dpm0644 %{SOURCE1} %{buildroot}%{_udevrulesdir}/51-these-are-not-joysticks-rm.rules
 
 %files
