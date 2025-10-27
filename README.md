@@ -12,9 +12,9 @@ sudo dnf copr enable rayfoxyote/nobara-42-bsb
 ### BSB Kernel Patches
 Install:
 ```shell
-sudo dnf install --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" kernel-0:6.17.3-200_bsb.nobara.fc42.x86_64 kernel-devel-0:6.17.3-200_bsb.nobara.fc42.x86_64
+sudo dnf install --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" kernel-0:6.17.5-200_bsb.nobara.fc42.x86_64 kernel-devel-0:6.17.5-200_bsb.nobara.fc42.x86_64
 sudo akmods --force --rebuild
-sudo dracut -f --kver --regenerate-all
+sudo dracut -f --regenerate-all
 ```
 
 ### Installing steam-devices with udev Rules
