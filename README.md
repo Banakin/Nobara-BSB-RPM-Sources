@@ -4,25 +4,33 @@ Modified and additional packages from/added to the Nobara RPM sources. Contains 
 This repository contains everything required to get up and running with the Bigscreen Beyond 2e. Im new to patches and packaging but I think I did a good job.
 
 ## Usage
-First, add enable the COPR
+Enable the COPR repo:
 ```shell
 sudo dnf copr enable rayfoxyote/nobara-42-bsb
 ```
 
-### Installing Kernel Patches
+### BSB Kernel Patches
+Install:
 ```shell
-sudo dnf install --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" kernel-0:6.17.3-200_bsb.nobara.fc42.x86_64
+sudo dnf install --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" kernel-0:6.17.3-200_bsb.nobara.fc42.x86_64 kernel-devel-0:6.17.3-200_bsb.nobara.fc42.x86_64
+sudo akmods --force --rebuild
+sudo dracut -f --kver --regenerate-all
 ```
 
 ### Installing steam-devices with udev Rules
+Install:
 ```shell
 sudo dnf upgrade --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" steam-devices
 ```
 
-### Installing [Baballonia Face Tracking Software](https://github.com/Project-Babble/Baballonia)
+### [Baballonia Face Tracking Software](https://github.com/Project-Babble/Baballonia)
+Install:
 ```shell
 sudo dnf install baballonia
 ```
+
+Open like any other Desktop app.
+
 
 
 ## Modifications Made
