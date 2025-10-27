@@ -86,5 +86,5 @@ chmod 0644 %{buildroot}%{_datadir}/applications/Baballonia.desktop
 %doc README.md
 
 %changelog
-* Sun Oct 26 2025 Brendan Leu <brenleu8@gmail.com>
-- Package .NET application: publish framework-dependent artifacts into %{_libexecdir}/%{name} and add wrapper in %{_bindir}/baballonia
+* Sun Oct 26 2025 Ray Foxyote <ray@foxyote.com>
+- Packaged Baballonia desktop dotnet application
