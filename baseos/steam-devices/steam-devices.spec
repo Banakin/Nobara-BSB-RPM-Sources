@@ -38,12 +38,14 @@ and other non-Steam games and game launchers.
 %install
 install -Dpm0644 60-steam-input.rules %{buildroot}%{_udevrulesdir}/60-steam-input.rules
 install -Dpm0644 60-steam-vr.rules %{buildroot}%{_udevrulesdir}/60-steam-vr.rules
+install -Dpm0644 60-steam-bsb.rules %{buildroot}%{_udevrulesdir}/60-steam-bsb.rules
 install -Dpm0644 %{SOURCE1} %{buildroot}%{_udevrulesdir}/51-these-are-not-joysticks-rm.rules
 
 %files
 %license LICENSE
 %{_udevrulesdir}/60-steam-input.rules
 %{_udevrulesdir}/60-steam-vr.rules
+%{_udevrulesdir}/60-steam-bsb.rules
 %{_udevrulesdir}/51-these-are-not-joysticks-rm.rules
 
 %changelog
