@@ -11,22 +11,15 @@ Source1:        99-bsb-cams.rules
 %description
 udev rules for the Bigscreen Beyond Headsets.
 
-%prep
 %autosetup
 
-
 %build
-%configure
-%make_build
-
 
 %install
-install -Dpm0644 %{Source0} %{buildroot}%{_sysconfdir}/udev/rules.d/99-bsb.rules
-install -Dpm0644 %{Source1} %{buildroot}%{_sysconfdir}/udev/rules.d/99-bsb.rules
+install -Dpm0644 %{SOURCE0} %{buildroot}%{_sysconfdir}/udev/rules.d/99-bsb.rules
+install -Dpm0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/udev/rules.d/99-bsb-cams.rules
 
 %files
-%license add-license-file-here
-%doc add-docs-here
 %{_sysconfdir}/udev/rules.d/99-bsb.rules
 %{_sysconfdir}/udev/rules.d/99-bsb-cams.rules
 
