@@ -25,7 +25,9 @@ sudo dnf install bigscreen-udev-rules
 ```
 Then reboot.
 
-### [Baballonia Face Tracking Software](https://github.com/Project-Babble/Baballonia)
+### Baballonia Face Tracking Software
+[Project-Babble/Baballonia](https://github.com/Project-Babble/Baballonia)
+
 #### Regular Install
 Install:
 ```shell
