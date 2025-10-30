@@ -17,6 +17,7 @@ URL:            https://github.com/Project-Babble/Baballonia
 BuildRequires:  dotnet-sdk-8.0
 BuildRequires:  git
 BuildRequires:  ca-certificates
+BuildRequires:  cudnn9-cuda-12
 Requires:       dotnet-runtime-8.0
 Requires:       lttng-ust
 Requires:       cudnn9-cuda-12
