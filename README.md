@@ -16,17 +16,32 @@ sudo dnf install --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb
 sudo akmods --force --rebuild
 sudo dracut -f --regenerate-all
 ```
+Then reboot.
 
-### Installing steam-devices with udev Rules
+### Installing udev Rules
 Install:
 ```shell
-sudo dnf upgrade --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" steam-devices
+sudo dnf install bigscreen-udev-rules
 ```
+Then reboot.
 
 ### [Baballonia Face Tracking Software](https://github.com/Project-Babble/Baballonia)
+#### Regular Install
 Install:
 ```shell
 sudo dnf install baballonia
+```
+
+#### Patched With CUDA Support
+Enable Nvidia cuDNN repo:
+```shell
+sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel10/x86_64/cuda-rhel10.repo
+sudo dnf clean all
+```
+
+Install:
+```shell
+sudo dnf install baballonia-nvidia
 ```
 
 Open like any other Desktop app.
@@ -34,10 +49,12 @@ Open like any other Desktop app.
 
 
 ## Modifications Made
-- appstream:
-    - Added baballonia.spec to build and install [Baballonia](https://github.com/Project-Babble/Baballonia).
 - baseos:
   - kernel (6.17)
     - Rebased and added the BSB Kernel Patches from LVRA ([1](https://lvra.gitlab.io/docs/hardware/bigscreen-beyond-kernel-6.17-1.patch) and [2](https://lvra.gitlab.io/docs/hardware/bigscreen-beyond-kernel-6.17-2.patch))
-  - steam-devices
-    - Added [BSB Rules](https://lvra.gitlab.io/docs/other/bigscreen-beyond/#bigscreen-beyond-2e-eyetracking-via-baballonia-under-linux)
+- bigscreen:
+    - Baballonia
+      - Added baballonia.spec to build and install [Baballonia](https://github.com/Project-Babble/Baballonia).
+      - Added baballonia-nvidia.spec to build and install [Baballonia](https://github.com/Project-Babble/Baballonia) with CUDA support.
+    - Rules
+      - Added bigscreen-udev-rules.spec to install the required udev rules for the BSB2e.

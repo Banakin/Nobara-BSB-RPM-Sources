@@ -1,6 +1,6 @@
 %global debug_package %{nil}
 
-Name:           baballonia
+Name:           baballonia-nvidia
 Version:        1.1.0.8
 Release:        1%{?dist}
 Summary:        A cross-platform, hardware-agnostic VR eye and face tracking application.
@@ -19,6 +19,9 @@ BuildRequires:  git
 BuildRequires:  ca-certificates
 Requires:       dotnet-runtime-8.0
 Requires:       lttng-ust
+Requires:       cudnn9-cuda-12
+
+Patch0:        baballonia-nvidia.patch
 
 %description
 Baballonia is a cross-platform, hardware-agnostic VR eye and face tracking application.
@@ -43,6 +46,9 @@ popd >/dev/null
 
 # cleanup the now-empty cloned dir
 rm -rf PROJECT-%{commit}
+
+# Apply Patches
+patch -p1 -i %{PATCH0}
 
 %build
 # Restore and publish a framework-dependent build (we depend on dotnet-runtime-8.0)
