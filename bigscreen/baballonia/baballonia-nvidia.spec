@@ -17,10 +17,13 @@ URL:            https://github.com/Project-Babble/Baballonia
 BuildRequires:  dotnet-sdk-8.0
 BuildRequires:  git
 BuildRequires:  ca-certificates
-BuildRequires:  cudnn9-cuda-12
 Requires:       dotnet-runtime-8.0
 Requires:       lttng-ust
 Requires:       cudnn9-cuda-12
+
+%global __requires_exclude %__requires_exclude|^libnvinfer.so.10
+%global __requires_exclude %__requires_exclude|^libnvinfer_plugin.so.10
+%global __requires_exclude %__requires_exclude|^libnvonnxparser.so.10
 
 Patch0:        baballonia-nvidia.patch
 

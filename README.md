@@ -35,7 +35,7 @@ sudo dnf install baballonia
 #### Patched With CUDA Support
 Enable Nvidia cuDNN repo:
 ```shell
-sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel10/x86_64/cuda-rhel10.repo
+sudo dnf config-manager addrepo --from-repofile='https://developer.download.nvidia.com/compute/cuda/repos/rhel10/x86_64/cuda-rhel10.repo'
 sudo dnf clean all
 ```
 
