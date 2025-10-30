@@ -21,7 +21,7 @@ Requires:       dotnet-runtime-8.0
 Requires:       lttng-ust
 Requires:       cudnn9-cuda-12
 
-%global __requires_exclude %__requires_exclude|^libnvinfer.so.10
+%global __requires_exclude ^libnvinfer.so.10
 %global __requires_exclude %__requires_exclude|^libnvinfer_plugin.so.10
 %global __requires_exclude %__requires_exclude|^libnvonnxparser.so.10
 
