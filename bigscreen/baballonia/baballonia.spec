@@ -2,7 +2,7 @@
 
 Name:           baballonia
 Version:        1.1.0.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A cross-platform, hardware-agnostic VR eye and face tracking application.
 
 License:        Babble Software Distribution License 1.0
@@ -55,7 +55,6 @@ dotnet publish src/Baballonia.Desktop/Baballonia.Desktop.csproj \
 # create target directories
 install -d %{buildroot}%{_libexecdir}/%{name}
 install -d %{buildroot}%{_datadir}/applications
-install -d %{buildroot}/lib64
 
 # Copy published files into libexec; publish output is relative to buildroot in our build step
 cp -a %{_publishdir}/* %{buildroot}%{_libexecdir}/%{name}/

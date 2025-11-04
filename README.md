@@ -48,7 +48,8 @@ sudo dnf install baballonia-nvidia
 
 Open like any other Desktop app.
 
-
+## Bigeye Gstreamer Plugin
+Made as an alternative for the go-bsb-script, you can install a GStreamer plugin to stream webcams into Baballonia.
 
 ## Modifications Made
 - baseos:
@@ -60,3 +61,5 @@ Open like any other Desktop app.
       - Added baballonia-nvidia.spec to build and install [Baballonia](https://github.com/Project-Babble/Baballonia) with CUDA support.
     - Rules
       - Added bigscreen-udev-rules.spec to install the required udev rules for the BSB2e.
+    - gst-plugin-bigeye
+      - Added gst-plugin-bigeye to install the Bigeye gstreamer plugin.

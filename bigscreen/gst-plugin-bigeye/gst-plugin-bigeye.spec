@@ -42,12 +42,10 @@ Rust Tutorial Plugin.}
 %{cargo_vendor_manifest}
 
 %install
-install -d %{buildroot}/lib64/gstreamer-1.0
-install -d %{buildroot}/lib/gstreamer-1.0
+install -d %{buildroot}%{_libdir}/gstreamer-1.0
 
-%global _publishfile target/release/libgstbigeye.so
-cp %{_publishfile} %{buildroot}/lib/gstreamer-1.0
-cp %{_publishfile} %{buildroot}/lib64/gstreamer-1.0
+%global _publishfile libgstbigeye.so
+cp target/release/%{_publishfile} %{buildroot}%{_libdir}/gstreamer-1.0/%{_publishfile}
 
 %if %{with check}
 %check
@@ -55,6 +53,7 @@ cp %{_publishfile} %{buildroot}/lib64/gstreamer-1.0
 %endif
 
 %files
+%{_libdir}/gstreamer-1.0/%{_publishfile}
 %license LICENSE
 %license LICENSE.dependencies
 %license cargo-vendor.txt
