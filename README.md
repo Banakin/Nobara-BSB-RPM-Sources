@@ -55,8 +55,13 @@ Install:
 ```shell
 sudo dnf install gst-plugin-bigeye
 ```
-*Note: You may also need to [install GStreamer](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html?gi-language=c).*
+*Note: You may or may not need to [install GStreamer](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html?gi-language=c). (feel free to let me know if trying this on a fresh Nobara install)*
 
+### Use with Baballonia
+Simply use this string as your source:
+```
+bigeyesrc ! jpegdec ! videoconvert ! appsink
+```
 
 ## Modifications Made
 - baseos:
