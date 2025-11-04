@@ -13,7 +13,7 @@ License:        LICENSE
 
 URL:            https://github.com/Banakin/gst-plugin-bigeye
 
-%global commit 1e13936eb8a62c152e8575808515d60f205790d6
+%global commit d1738ba9da90807dc3c664f81c0e78d3bf607300
 %global gittag HEAD
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Source: https://github.com/Banakin/gst-plugin-bigeye/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
