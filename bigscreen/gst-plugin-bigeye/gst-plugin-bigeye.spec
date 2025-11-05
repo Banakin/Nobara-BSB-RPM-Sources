@@ -4,7 +4,7 @@
 %global cargo_install_lib 0
 
 Name:           gst-plugin-bigeye
-Version:        0.1.0
+Version:        0.1.1
 Release:        %autorelease
 Summary:        Rust Tutorial Plugin
 
@@ -16,7 +16,7 @@ URL:            https://github.com/Banakin/gst-plugin-bigeye
 %global commit d1738ba9da90807dc3c664f81c0e78d3bf607300
 %global gittag HEAD
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-Source: https://github.com/Banakin/gst-plugin-bigeye/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
+Source: https://github.com/Banakin/gst-plugin-bigeye/archive/refs/tags/v%{version}.tar.gz
 Source: gst-plugin-bigeye-0.1.0-vendor.tar.xz
 
 BuildRequires:  glib2-devel
@@ -27,7 +27,7 @@ BuildRequires:  cargo-rpm-macros >= 26
 Requires:       libuvc
 
 %global _description %{expand:
-Rust Tutorial Plugin.}
+Bigscreen Beyond 2e eye tracking video source using libuvc. Plugin is not affiliated with Bigscreen.}
 
 %description %{_description}
 
