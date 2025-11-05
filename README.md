@@ -60,7 +60,7 @@ sudo dnf install gst-plugin-bigeye
 ### Use with Baballonia
 Simply use this string as your source:
 ```
-bigeyesrc ! jpegdec ! videoconvert ! appsink
+bigeyesrc ! queue ! jpegdec ! videoconvert ! appsink
 ```
 
 ## Modifications Made
