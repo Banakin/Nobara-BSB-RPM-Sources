@@ -29,8 +29,7 @@ Bigscreen Beyond 2e eye tracking video source using libuvc. Plugin is not affili
 %description %{_description}
 
 %prep
-# v%{version} is the name of the tar file
-%autosetup -n v%{version} -p1 -a1
+%autosetup -n %{name}-%{version} -p1 -a1
 %cargo_prep -v vendor
 
 %build
