@@ -29,7 +29,7 @@ Bigscreen Beyond 2e eye tracking video source using libuvc. Plugin is not affili
 %description %{_description}
 
 %prep
-%autosetup -n gst-plugin-bigeye-%{commit} -p1 -a1
+%autosetup -n v%{version}.tar.gz -p1 -a1
 %cargo_prep -v vendor
 
 %build
