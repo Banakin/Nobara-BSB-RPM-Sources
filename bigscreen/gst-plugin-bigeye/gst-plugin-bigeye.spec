@@ -14,7 +14,7 @@ License:        LICENSE
 URL:            https://github.com/Banakin/gst-plugin-bigeye
 
 Source: https://github.com/Banakin/gst-plugin-bigeye/archive/refs/tags/v%{version}.tar.gz
-Source: gst-plugin-bigeye-0.1.0-vendor.tar.xz
+Source: gst-plugin-bigeye-0.1.1-vendor.tar.xz
 
 BuildRequires:  glib2-devel
 BuildRequires:  gstreamer1-plugins-base-devel
