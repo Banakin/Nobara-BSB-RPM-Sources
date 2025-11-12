@@ -12,7 +12,7 @@ sudo dnf copr enable rayfoxyote/nobara-42-bsb
 ### BSB Kernel Patches
 Install:
 ```shell
-sudo dnf install --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" kernel-0:6.17.5-200_bsb.nobara.fc42.x86_64 kernel-devel-0:6.17.5-200_bsb.nobara.fc42.x86_64
+sudo dnf install --repo="copr:copr.fedorainfracloud.org:rayfoxyote:nobara-42-bsb" kernel-0:6.17.7-200_bsb.nobara.fc42.x86_64 kernel-devel-0:6.17.7-200_bsb.nobara.fc42.x86_64
 sudo akmods --force --rebuild
 sudo dracut -f --regenerate-all
 ```
