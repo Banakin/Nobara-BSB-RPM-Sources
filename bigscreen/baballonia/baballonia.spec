@@ -1,15 +1,15 @@
 %global debug_package %{nil}
 
 Name:           baballonia
-Version:        1.1.0.8
+Version:        1.1.0.9
 Release:        2%{?dist}
 Summary:        A cross-platform, hardware-agnostic VR eye and face tracking application.
 
 License:        Babble Software Distribution License 1.0
 URL:            https://github.com/Project-Babble/Baballonia
 
-%global commit 43b3af174be0d922736e9218cced2b9070b38164
-%global gittag v1.1.0.8
+%global commit 70413a7ffe72ca2a137ba6da744cf23fb1cef9d7
+%global gittag v1.1.0.9
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 ## We fetch sources from git in %prep (includes submodules). The upstream GitHub auto-archive
 ## does not include submodule contents, so we clone the repo with submodules here.
