@@ -54,7 +54,7 @@ Version: %{_basekver}.%{_stablekver}
 %if 0%{?_is_rc}
 %define customver 0.%{_rcver}
 %else
-%define customver 200
+%define customver 200_bsb
 %endif
 
 Release:%{customver}.nobara%{?dist}
@@ -119,6 +119,9 @@ Patch10: 0001-Add-xpadneo-bluetooth-hid-driver-module.patch
 Patch20: 0001-ampere-arm64-Add-a-fixup-handler-for-alignment-fault.patch
 Patch21: 0002-ampere-arm64-Work-around-Ampere-Altra-erratum-82288-.patch
 Patch22: xe-nonx86.patch
+
+# bsb patches
+Patch23: bigscreen-beyond-kernel-6.18.patch
 
 %define __spec_install_post /usr/lib/rpm/brp-compress || :
 %define debug_package %{nil}
@@ -429,6 +432,9 @@ patch -p1 -i %{PATCH10}
 patch -p1 -i %{PATCH20}
 patch -p1 -i %{PATCH21}
 patch -p1 -i %{PATCH22}
+
+# Apply bsb patches
+patch -p1 -i %{PATCH23}
 
 # Fetch the config and move it to the proper directory
 cp %{SOURCE1} .config
@@ -1119,6 +1125,10 @@ fi
 %files
 
 %changelog
+
+* Sun Feb 1 2026 RayFoxyote <ray@foxyote.com> - 6.18.7-200_bsb
+- Add bigscreen-beyond-kernel-6.18.patch
+
 * Sat Jan 24 2026 LionHeartP <LionHeartP@proton.me> - 6.18.7-200
 - Update to 6.18.7
 - Remove elgato patch (upstreamed)
@@ -1167,6 +1177,9 @@ fi
 
 * Fri Oct 31 2025 LionHeartP <LionHeartP@proton.me> - 6.17.6-200
 - Update to 6.17.6
+
+* Sun Oct 26 2025 RayFoxyote <ray@foxyote.com> - 6.17.5-200_bsb
+- Add bigscreen-beyond-kernel-6.17.patch
 
 * Sat Oct 25 2025 LionHeartP <LionHeartP@proton.me> - 6.17.5-200
 - Update to 6.17.5
