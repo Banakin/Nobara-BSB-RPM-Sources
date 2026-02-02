@@ -1,7 +1,7 @@
 Summary: A set of scripts to run upon first user login
 Name: nobara-login
 Version: 1.2
-Release: 10%{?dist}
+Release: 15%{?dist}
 License: Public Domain
 Group: System Environment/Base
 Source0: hwcheck.sh
@@ -19,17 +19,21 @@ Source15: 00-handheld-power.conf
 Source16: wine_gaming.conf
 Source21: 99-ntsync.rules
 Source22: 70-wooting.rules
+Source23: 70-asus.rules
 Source24: 70-drunkdeer.rules
 Source27: 75-powercap.rules
 Source28: krunnerrc
 Source29: 99-steelseries.rules
+Source30: nobara_login_discord.sh
+Source31: nobara_login_extest_wayland_input.sh
+Source32: nobara_login_force_nobara_rpm_installer_default.sh
+Source33: nobara_login_gnome_newfile.sh
+Source34: 99-thunderbolt.rules
 
 BuildArch: noarch
 BuildRequires: filesystem
 Requires: system-release
 Requires: nobara-login-sysctl
-Requires: nobara-welcome
-Requires: nobara-nvidia-wizard
 Requires: pbcli-nobara
 Provides: nobara-amdgpu-config > 2.1
 Obsoletes: nobara-amdgpu-config <= 2.1
@@ -79,23 +83,35 @@ install -m 0755 %{SOURCE14} $RPM_BUILD_ROOT%{_sysconfdir}/polkit-1/rules.d/90-co
 install -m 0755 %{SOURCE15} $RPM_BUILD_ROOT%{_sysconfdir}/login.conf.d/00-handheld-power.conf
 install -m 0755 %{SOURCE16} $RPM_BUILD_ROOT%{_datadir}/pipewire/pipewire-pulse.conf.d/wine_gaming.conf
 install -m 0644 %{SOURCE21} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/99-ntsync.rules
+install -m 0644 %{SOURCE34} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/99-thunderbolt.rules
 install -m 0644 %{SOURCE22} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/70-wooting.rules
+install -m 0644 %{SOURCE23} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/70-asus.rules
 install -m 0644 %{SOURCE24} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/70-drunkdeer.rules
 install -m 0644 %{SOURCE27} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/75-powercap.rules
 install -m 0644 %{SOURCE28} $RPM_BUILD_ROOT%{_sysconfdir}/xdg/krunnerrc
 install -m 0644 %{SOURCE29} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/99-steelseries.rules
+install -m 0755 %{SOURCE30} $RPM_BUILD_ROOT%{_bindir}/nobara_login_discord.sh
+install -m 0755 %{SOURCE31} $RPM_BUILD_ROOT%{_bindir}/nobara_login_extest_wayland_input.sh
+install -m 0755 %{SOURCE32} $RPM_BUILD_ROOT%{_bindir}/nobara_login_force_nobara_rpm_installer_default.sh
+install -m 0755 %{SOURCE33} $RPM_BUILD_ROOT%{_bindir}/nobara_login_gnome_newfile.sh
 
 
 %files
 %{_bindir}/nobara-firstrun
 %{_bindir}/hwcheck
 %{_bindir}/updatecheck
+%{_bindir}/nobara_login_discord.sh
+%{_bindir}/nobara_login_extest_wayland_input.sh
+%{_bindir}/nobara_login_force_nobara_rpm_installer_default.sh
+%{_bindir}/nobara_login_gnome_newfile.sh
 %{_sysconfdir}/dnf/protected.d/nobara.conf
 %{_sysconfdir}/udev/rules.d/40-hpet-permissions.rules
 %{_sysconfdir}/udev/rules.d/60-ioschedulers.rules
 %{_sysconfdir}/udev/rules.d/99-ntsync.rules
+%{_sysconfdir}/udev/rules.d/99-thunderbolt.rules
 %{_sysconfdir}/udev/rules.d/70-wooting.rules
 %{_sysconfdir}/udev/rules.d/70-drunkdeer.rules
+%{_sysconfdir}/udev/rules.d/70-asus.rules
 %{_sysconfdir}/polkit-1/rules.d/90-corectrl.rules
 %{_sysconfdir}/login.conf.d/00-handheld-power.conf
 %{_datadir}/pipewire/pipewire-pulse.conf.d/wine_gaming.conf
@@ -111,6 +127,11 @@ install -m 0644 %{SOURCE29} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/99-steels
 %{_prefix}/lib/sysctl.d/20-uplay-mtu-probing.conf
 
 %changelog
+* Sun Dec 28 2025 LionHeartP <LionHeartP@proton.me> - 1.2-14
+- Pull all updates from copr
+- Update wooting rules
+- Add ROG Falcata rules
+
 * Mon May 5 2025 LionHeartP <LionHeartP@proton.me> - 1.2-2
 - Add udev rule for MangoHud power reading
 

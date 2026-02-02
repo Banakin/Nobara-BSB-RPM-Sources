@@ -1,5 +1,5 @@
 Name:           gpu-screen-recorder
-Version:        5.8.2
+Version:        5.12.2
 Release:        1%{dist}
 Summary:        A shadowplay-like screen recorder for Linux. The fastest screen recorder for Linux.
 
@@ -61,9 +61,43 @@ setcap cap_sys_admin+ep %{_bindir}/gsr-kms-server
 %{_includedir}/gsr/plugin.h
 %{_prefix}/lib/systemd/user/%{name}.service
 %{_prefix}/lib/modprobe.d/gsr-nvidia.conf
-
+%{_mandir}/man1/%{name}.1*
+%{_mandir}/man1/gsr-kms-server.1*
 
 %changelog
+* Fri Jan 23 2026 LionHeartP <LionHeartP@proton.me> - 5.12.2-1
+- Update to 5.12.2
+
+* Wed Jan 21 2026 LionHeartP <LionHeartP@proton.me> - 5.12.1-1
+- Update to 5.12.1
+
+* Sun Jan 18 2026 LionHeartP <LionHeartP@proton.me> - 5.12.0-1
+- Update to 5.12.0
+
+* Fri Jan 09 2026 LionHeartP <LionHeartP@proton.me> - 5.11.5-1
+- Update to 5.11.5
+
+* Sat Dec 27 2025 LionHeartP <LionHeartP@proton.me> - 5.11.2-1
+- Update to 5.11.2
+
+* Thu Dec 25 2025 LionHeartP <LionHeartP@proton.me> - 5.11.1-1
+- Update to 5.11.1
+
+* Mon Dec 08 2025 LionHeartP <LionHeartP@proton.me> - 5.10.2-1
+- Update to 5.10.2
+
+* Fri Dec 05 2025 LionHeartP <LionHeartP@proton.me> - 5.9.4-1
+- Update to 5.9.4
+
+* Wed Nov 26 2025 LionHeartP <LionHeartP@proton.me> - 5.9.3-1
+- Update to 5.9.3
+
+* Sun Nov 23 2025 LionHeartP <LionHeartP@proton.me> - 5.9.2-1
+- Update to 5.9.2
+
+* Fri Nov 21 2025 LionHeartP <LionHeartP@proton.me> - 5.9.1-1
+- Update to 5.9.1
+
 * Sat Nov 15 2025 LionHeartP <LionHeartP@proton.me> - 5.8.2-1
 - Update to 5.8.2
 

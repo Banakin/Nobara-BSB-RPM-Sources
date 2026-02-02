@@ -18,11 +18,16 @@
 %global vendor_nvk_crates 1
 %endif
 
-%ifarch %{ix86} x86_64
+%ifarch %{ix86} aarch64 x86_64
 %global with_crocus 1
 %global with_i915   1
 %global with_iris   1
-%global platform_vulkan ,intel,intel_hasvk
+%global intel_platform_vulkan %{?with_vulkan_hw:,intel,intel_hasvk}%{!?with_vulkan_hw:%{nil}}
+%endif
+%ifarch aarch64 x86_64
+%if 0%{?with_vulkan_hw}
+%global with_intel_vk_rt 1
+%endif
 %endif
 
 %ifarch aarch64
@@ -58,11 +63,11 @@
 
 %global with_vulkan_overlay 1
 
-%global vulkan_drivers swrast%{?base_vulkan}%{?platform_vulkan}%{?with_nvk:,nouveau}
+%global vulkan_drivers swrast%{?base_vulkan}%{?intel_platform_vulkan}%{?asahi_platform_vulkan}%{?extra_platform_vulkan}%{?with_nvk:,nouveau}%{?with_virtio:,virtio}%{?with_d3d12:,microsoft-experimental}
 
 Name:           mesa-vulkan-drivers-freeworld
 Summary:        The mesa graphics vulkan driver stack.
-%global ver 25.3.0
+%global ver 25.3.4
 Version:        %{lua:ver = string.gsub(rpm.expand("%{ver}"), "-", "~"); print(ver)}
 Release:        %autorelease
 License:        MIT
@@ -86,7 +91,6 @@ Source12:       https://crates.io/api/v1/crates/quote/%{rust_quote_ver}/download
 Source13:       https://crates.io/api/v1/crates/syn/%{rust_syn_ver}/download#/syn-%{rust_syn_ver}.tar.gz
 Source14:       https://crates.io/api/v1/crates/unicode-ident/%{rust_unicode_ident_ver}/download#/unicode-ident-%{rust_unicode_ident_ver}.tar.gz
 Source15:       https://crates.io/api/v1/crates/rustc-hash/%{rustc_hash_ver}/download#/rustc-hash-%{rustc_hash_ver}.tar.gz
-
 
 # https://gitlab.com/evlaV/mesa/
 Patch30:        valve.patch
@@ -267,7 +271,7 @@ rewrite_wrap_file rustc-hash
   -Dgallium-rusticl=true \
 %endif
   -Dvulkan-drivers=%{?vulkan_drivers} \
-  -Dvulkan-layers=device-select \
+  -Dvulkan-layers=device-select,anti-lag \
   -Dgles1=enabled \
   -Dgles2=enabled \
   -Dopengl=true \
@@ -275,9 +279,7 @@ rewrite_wrap_file rustc-hash
   -Dglx=dri \
   -Degl=enabled \
   -Dglvnd=enabled \
-%ifnarch aarch64 x86_64
-  -Dintel-rt=disabled \
-%endif
+  -Dintel-rt=%{?with_intel_vk_rt:enabled}%{!?with_intel_vk_rt:disabled} \
   -Dmicrosoft-clc=disabled \
   -Dllvm=enabled \
   -Dshared-llvm=enabled \
@@ -432,10 +434,28 @@ rm -Rf %{buildroot}%{_libdir}/pkgconfig/gbm.pc
 rm -Rf %{buildroot}%{_datadir}/drirc.d/00-radv-defaults.conf
 %endif
 
+%if 0%{?with_nvk}
+%cargo_license_summary
+%{cargo_license} > LICENSE.dependencies.%{_arch}
+%if 0%{?vendor_nvk_crates}
+%cargo_vendor_manifest
+install -Dpm0644 cargo-vendor.txt \
+  %{buildroot}%{_licensedir}/%{name}/cargo-vendor.%{_arch}.txt
+%endif
+%endif
+
 %files
+%if 0%{?with_nvk}
+%license LICENSE.dependencies.%{_arch}
+%if 0%{?vendor_nvk_crates}
+%license cargo-vendor.%{_arch}.txt
+%endif
+%endif
 %{_libdir}/libvulkan_lvp.so
 %{_datadir}/vulkan/icd.d/lvp_icd.*.json
+%{_libdir}/libVkLayer_MESA_anti_lag.so
 %{_libdir}/libVkLayer_MESA_device_select.so
+%{_datadir}/vulkan/implicit_layer.d/VkLayer_MESA_anti_lag.json
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_MESA_device_select.json
 %if 0%{?with_vulkan_hw}
 %{_libdir}/libvulkan_radeon.so
@@ -464,6 +484,21 @@ rm -Rf %{buildroot}%{_datadir}/drirc.d/00-radv-defaults.conf
 %endif
 
 %changelog
+* Sat Jan 24 2026 LionHeartP <LionHeartP@proton.me> - 25.3.4-1
+- Update to 25.3.4
+- Enable Intel RT
+
+* Thu Jan 01 2026 LionHeartP <LionHeartP@proton.me> - 25.3.3-1
+- Update to 25.3.3
+
+* Thu Dec 18 2025 LionHeartP <LionHeartP@proton.me> - 25.3.2-1
+- Update to 25.3.2
+- Include #38987 for SteamVR
+
+* Thu Dec 04 2025 LionHeartP <LionHeartP@proton.me> - 25.3.1-1
+- Update to 25.3.1
+- Enable AMD anti-lag
+
 * Mon Nov 17 2025 LionHeartP <LionHeartP@proton.me> - 25.3.0-1
 - Update to 25.3.0
 - Drop min_image_count.patch

@@ -1,9 +1,9 @@
 %global _default_patch_fuzz 2
 
-%global commit 9a9342e4aa400ba1841f48035a93730fabd91cc7
+%global commit dc352f3d7c0e9cfe47d0528c059955ab90f1a563
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global build_timestamp %(date +"%Y%m%d")
-%global rel_build 1.git.%{build_timestamp}.%{shortcommit}%{?dist}
+%global rel_build 2.git.%{build_timestamp}.%{shortcommit}%{?dist}
 
 %ifnarch s390x
 %global with_hardware 1
@@ -35,7 +35,7 @@
 %global intel_platform_vulkan %{?with_vulkan_hw:,intel,intel_hasvk}%{!?with_vulkan_hw:%{nil}}
 %endif
 %ifarch aarch64 x86_64
-%if !0%{?with_vulkan_hw}
+%if 0%{?with_vulkan_hw}
 %global with_intel_vk_rt 1
 %endif
 %endif
@@ -78,7 +78,7 @@
 
 Name:           mesa-vulkan-drivers-git-freeworld
 Summary:        The mesa graphics vulkan driver stack.
-%global ver 25.4.0
+%global ver 26.0.0
 Version:        %{lua:ver = string.gsub(rpm.expand("%{ver}"), "-", "~"); print(ver)}
 Release:        %{rel_build}
 License:        MIT
@@ -309,9 +309,7 @@ rewrite_wrap_file rustc-hash
   -Dglx=dri \
   -Degl=enabled \
   -Dglvnd=enabled \
-%ifnarch aarch64 x86_64
-  -Dintel-rt=disabled \
-%endif
+  -Dintel-rt=%{?with_intel_vk_rt:enabled}%{!?with_intel_vk_rt:disabled} \
   -Dmicrosoft-clc=disabled \
   -Dllvm=enabled \
   -Dshared-llvm=enabled \
@@ -329,9 +327,11 @@ rewrite_wrap_file rustc-hash
 
 %if 0%{?with_nvk}
 %cargo_license_summary
-%{cargo_license} > LICENSE.dependencies
+%{cargo_license} > LICENSE.dependencies.%{_arch}
 %if 0%{?vendor_nvk_crates}
 %cargo_vendor_manifest
+install -Dpm0644 cargo-vendor.txt \
+  %{buildroot}%{_licensedir}/%{name}/cargo-vendor.%{_arch}.txt
 %endif
 %endif
 
@@ -477,9 +477,9 @@ rm -Rf %{buildroot}%{_datadir}/drirc.d/00-radv-defaults.conf
 
 %files
 %if 0%{?with_nvk}
-%license LICENSE.dependencies
+%license LICENSE.dependencies.%{_arch}
 %if 0%{?vendor_nvk_crates}
-%license cargo-vendor.txt
+%license cargo-vendor.%{_arch}.txt
 %endif
 %endif
 %{_libdir}/libvulkan_lvp.so
@@ -534,6 +534,42 @@ rm -Rf %{buildroot}%{_datadir}/drirc.d/00-radv-defaults.conf
 %endif
 
 %changelog
+* Sat Jan 24 2026 LionHeartP <LionHeartP@proton.me> - 26.0.0-2
+- Update to latest commit
+
+* Thu Jan 22 2026 LionHeartP <LionHeartP@proton.me> - 26.0.0-1
+- Version bump
+- Update to latest commit
+- Remove #39314 + #39116 (upstreamed
+
+* Sat Jan 17 2026 LionHeartP <LionHeartP@proton.me> - 25.4.0-11
+- Update to latest commit
+- Pull #39314 + #39116 for RT improvements
+- Enable Intel RT driver
+
+* Fri Jan 09 2026 LionHeartP <LionHeartP@proton.me> - 25.4.0-10
+- Update to latest commit
+
+* Thu Jan 01 2026 LionHeartP <LionHeartP@proton.me> - 25.4.0-9
+- Update to latest commit
+
+* Sun Dec 21 2025 LionHeartP <LionHeartP@proton.me> - 25.4.0-8
+- Update to latest commit
+- Update #38987 with fix for Monado
+
+* Wed Dec 17 2025 LionHeartP <LionHeartP@proton.me> - 25.4.0-7
+- Update to latest commit
+- Include #38987 for SteamVR
+
+* Thu Dec 11 2025 LionHeartP <LionHeartP@proton.me> - 25.4.0-4
+- Update to latest commit
+
+* Thu Dec 04 2025 LionHeartP <LionHeartP@proton.me> - 25.4.0-3
+- Update to latest commit
+
+* Thu Nov 27 2025 LionHeartP <LionHeartP@proton.me> - 25.4.0-2
+- Update to latest commit
+
 * Wed Nov 19 2025 LionHeartP <LionHeartP@proton.me> - 25.4.0-1
 - Update to latest commit
 - Bump version

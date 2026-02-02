@@ -3,7 +3,7 @@
 %global israwhide 0
 
 Name:           rpmfusion-%{_repo}-release
-Version:        42
+Version:        43
 Release:        2
 Summary:        RPM Fusion (%{_repo}) Repository Configuration
 

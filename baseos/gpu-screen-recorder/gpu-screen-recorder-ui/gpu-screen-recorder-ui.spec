@@ -1,11 +1,12 @@
 Name:           gpu-screen-recorder-ui
-Version:        1.8.0
+Version:        1.10.4
 Release:        1%{dist}
 Summary:        A shadowplay-like screen recorder for Linux. The fastest screen recorder for Linux.
 License:        GPL-3.0-or-later
 Source:         https://dec05eba.com/snapshot/%{name}.git.%{version}.tar.gz
 URL:            https://git.dec05eba.com/%{name}/about
 
+BuildRequires:  desktop-file-utils
 BuildRequires:  gcc
 BuildRequires:  (gcc-g++ or gcc-c++)
 BuildRequires:  meson
@@ -21,6 +22,7 @@ BuildRequires:  pkgconfig(libpulse-simple)
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(libdrm)
+BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  kernel-headers
 Requires:       gpu-screen-recorder
 Requires:       gpu-screen-recorder-notification
@@ -55,10 +57,41 @@ setcap cap_setuid+ep %{_bindir}/gsr-global-hotkeys
 %license LICENSE
 %doc README.md
 %{_bindir}/gsr*
+%{_datadir}/applications/gpu-screen-recorder.desktop
+%{_datadir}/icons/hicolor/*/apps/gpu-screen-recorder.png
 %{_datadir}/gsr-ui
 %{_exec_prefix}/lib/systemd/user/%{name}.service
 
 %changelog
+* Sat Jan 24 2026 LionHeartP <LionHeartP@proton.me> - 1.10.4-1
+- Update to 1.10.4
+- Add new dbus dependency
+
+* Wed Jan 21 2026 LionHeartP <LionHeartP@proton.me> - 1.10.2-1
+- Update to 1.10.2
+
+* Tue Jan 20 2026 LionHeartP <LionHeartP@proton.me> - 1.10.1-1
+- Update to 1.10.1
+
+* Fri Jan 09 2026 LionHeartP <LionHeartP@proton.me> - 1.9.3-1
+- Update to 1.9.3
+- Add new dependency and files
+
+* Sat Dec 27 2025 LionHeartP <LionHeartP@proton.me> - 1.9.1-1
+- Update to 1.9.1
+
+* Thu Dec 25 2025 LionHeartP <LionHeartP@proton.me> - 1.9.0-1
+- Update to 1.9.0
+
+* Mon Dec 08 2025 LionHeartP <LionHeartP@proton.me> - 1.8.3-1
+- Update to 1.8.3
+
+* Sat Nov 29 2025 LionHeartP <LionHeartP@proton.me> - 1.8.2-1
+- Update to 1.8.2
+
+* Fri Nov 21 2025 LionHeartP <LionHeartP@proton.me> - 1.8.1-1
+- Update to 1.8.1
+
 * Mon Nov 10 2025 LionHeartP <LionHeartP@proton.me> - 1.8.0-1
 - Update to 1.8.0
 

@@ -38,7 +38,7 @@ Name: kernel
 Summary: The Linux Kernel with Cachyos and Nobara Patches
 
 %define _basekver 6.17
-%define _stablekver 8
+%define _stablekver 12
 %define _rcver rc7
 %if %{_stablekver} == 0
 %define _tarkver %{_basekver}
@@ -60,7 +60,7 @@ Version: %{_basekver}.%{_stablekver}
 Release:%{customver}.nobara%{?dist}
 
 # Define rawhide fedora version
-%define _rawhidever 43
+%define _rawhidever 44
 
 %define rpmver %{version}-%{release}
 %define rpmverobsolete 6.12.9-200.fsync%{?dist}
@@ -116,6 +116,8 @@ Patch9: amdgpu-HAINAN-variant-fixup.patch
 Patch10: 0001-Allow-to-set-custom-USB-pollrate-for-specific-device.patch
 # Add xpadneo as patch instead of using dkms module
 Patch11: 0001-Add-xpadneo-bluetooth-hid-driver-module.patch
+# https://gitlab.freedesktop.org/drm/amd/-/issues/4773
+Patch12: 0001-amdgpu-Add-CH7218-PCON-to-the-VRR-whitelist.patch
 
 # aarch64 patches
 Patch20: 0001-ampere-arm64-Add-a-fixup-handler-for-alignment-fault.patch
@@ -428,6 +430,7 @@ patch -p1 -i %{PATCH8}
 patch -p1 -i %{PATCH9}
 patch -p1 -i %{PATCH10}
 patch -p1 -i %{PATCH11}
+patch -p1 -i %{PATCH12}
 
 # Apply aarch64 patches
 patch -p1 -i %{PATCH20}
@@ -1126,6 +1129,19 @@ fi
 %files
 
 %changelog
+* Fri Dec 12 2025 LionHeartP <LionHeartP@proton.me> - 6.17.12-200
+- Update to 6.17.12
+- Add 0001-amdgpu-Add-CH7218-PCON-to-the-VRR-whitelist.patch
+
+* Sun Dec 07 2025 LionHeartP <LionHeartP@proton.me> - 6.17.11-200
+- Update to 6.17.11
+
+* Mon Dec 01 2025 LionHeartP <LionHeartP@proton.me> - 6.17.10-200
+- Update to 6.17.10
+
+* Mon Nov 24 2025 LionHeartP <LionHeartP@proton.me> - 6.17.9-200
+- Update to 6.17.9
+
 * Fri Nov 14 2025 LionHeartP <LionHeartP@proton.me> - 6.17.8-200
 - Update to 6.17.8
 

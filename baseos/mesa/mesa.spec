@@ -30,7 +30,7 @@
 %global intel_platform_vulkan %{?with_vulkan_hw:,intel,intel_hasvk}%{!?with_vulkan_hw:%{nil}}
 %endif
 %ifarch aarch64 x86_64
-%if !0%{?with_vulkan_hw}
+%if 0%{?with_vulkan_hw}
 %global with_intel_vk_rt 1
 %endif
 %endif
@@ -73,7 +73,7 @@
 
 Name:           mesa
 Summary:        Mesa graphics libraries
-%global ver 25.3.0
+%global ver 25.3.4
 Version:        %{lua:ver = string.gsub(rpm.expand("%{ver}"), "-", "~"); print(ver)}
 Release:        %autorelease
 License:        MIT AND BSD-3-Clause AND SGI-B-2.0
@@ -440,7 +440,7 @@ rewrite_wrap_file rustc-hash
   -Dgallium-rusticl=true \
 %endif
   -Dvulkan-drivers=%{?vulkan_drivers} \
-  -Dvulkan-layers=device-select \
+  -Dvulkan-layers=device-select,anti-lag \
   -Dgles1=enabled \
   -Dgles2=enabled \
   -Dopengl=true \
@@ -471,9 +471,11 @@ rewrite_wrap_file rustc-hash
 
 %if 0%{?with_nvk}
 %cargo_license_summary
-%{cargo_license} > LICENSE.dependencies
+%{cargo_license} > LICENSE.dependencies.%{_arch}
 %if 0%{?vendor_nvk_crates}
 %cargo_vendor_manifest
+install -Dpm0644 cargo-vendor.txt \
+  %{buildroot}%{_licensedir}/%{name}/cargo-vendor.%{_arch}.txt
 %endif
 %endif
 
@@ -677,14 +679,16 @@ popd
 
 %files vulkan-drivers
 %if 0%{?with_nvk}
-%license LICENSE.dependencies
+%license LICENSE.dependencies.%{_arch}
 %if 0%{?vendor_nvk_crates}
-%license cargo-vendor.txt
+%license cargo-vendor.%{_arch}.txt
 %endif
 %endif
 %{_libdir}/libvulkan_lvp.so
 %{_datadir}/vulkan/icd.d/lvp_icd.*.json
+%{_libdir}/libVkLayer_MESA_anti_lag.so
 %{_libdir}/libVkLayer_MESA_device_select.so
+%{_datadir}/vulkan/implicit_layer.d/VkLayer_MESA_anti_lag.json
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_MESA_device_select.json
 %if 0%{?with_virtio}
 %{_libdir}/libvulkan_virtio.so
@@ -725,6 +729,21 @@ popd
 %endif
 
 %changelog
+* Sat Jan 24 2026 LionHeartP <LionHeartP@proton.me> - 25.3.4-1
+- Update to 25.3.4
+- Enable Intel RT
+
+* Thu Jan 01 2026 LionHeartP <LionHeartP@proton.me> - 25.3.3-1
+- Update to 25.3.3
+
+* Thu Dec 18 2025 LionHeartP <LionHeartP@proton.me> - 25.3.2-1
+- Update to 25.3.2
+- Include #38987 for SteamVR
+
+* Thu Dec 04 2025 LionHeartP <LionHeartP@proton.me> - 25.3.1-1
+- Update to 25.3.1
+- Enable AMD anti-lag
+
 * Mon Nov 17 2025 LionHeartP <LionHeartP@proton.me> - 25.3.0-1
 - Update to 25.3.0
 - Drop min_image_count.patch
